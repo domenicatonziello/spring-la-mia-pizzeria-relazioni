@@ -1,9 +1,12 @@
 package org.java.pizzeria.demo.pojo;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -26,6 +29,9 @@ public class Pizza {
 	@Min(value = 0, message = "Price has to be from 0 to 1000 euro")
 	@Max(value = 1000)
 	private float price;
+	
+	@OneToMany(mappedBy = "pizza")
+	private List<OffertaSpeciale> offerte;
 	
 	public Pizza() {}
 	
@@ -66,7 +72,15 @@ public class Pizza {
 	public void setPrice(float price) {
 		this.price = price;
 	}
+	public List<OffertaSpeciale> getOfferte() {
+		return offerte;
+	}
+	public void setOfferte(List<OffertaSpeciale> offerte) {
+		this.offerte = offerte;
+	}
+
 	
+
 	@Override
 	public String toString() {
 		return "[" + getId() + "]" + 
