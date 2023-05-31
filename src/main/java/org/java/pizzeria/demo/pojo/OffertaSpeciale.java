@@ -16,9 +16,15 @@ public class OffertaSpeciale {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+
 	private LocalDate dataInizio;
+	
+
 	private LocalDate dataFine;
+	
+
 	private String titolo;
+	
 	private double sconto;
 	
 	

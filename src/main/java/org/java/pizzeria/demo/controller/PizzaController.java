@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.java.pizzeria.demo.pojo.Pizza;
-import org.java.pizzeria.demo.repo.PizzaRepo;
+import org.java.pizzeria.demo.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,18 +24,18 @@ import jakarta.validation.Valid;
 public class PizzaController {
 	
 	@Autowired
-	private PizzaRepo pizzarepo;
+	private PizzaService pizzaService;
 	
 	@GetMapping("/")
 	public String getPizze(Model model) {
-		List<Pizza> pizze = pizzarepo.findAll();
+		List<Pizza> pizze = pizzaService.findAll();
 		model.addAttribute("pizze", pizze);
 		return "index";
 	}
 	@PostMapping("/")
 	public String goToPizzaIndexResearch(Model model, @RequestParam(required = false) String name) {
 
-		List<Pizza> pizze = pizzarepo.findByNameContaining(name);
+		List<Pizza> pizze = pizzaService.findByNameContaining(name);
 
 		model.addAttribute("pizze", pizze);
 		model.addAttribute("searchTerm", name);
@@ -47,7 +47,7 @@ public class PizzaController {
 	@GetMapping("/pizza/{id}")
 	public String show(@PathVariable("id") int id, Model model ) {
 		
-		Optional <Pizza> optPizza = pizzarepo.findById(id);
+		Optional <Pizza> optPizza = pizzaService.findByIdWithOffertaSpeciale(id);
 		
 		Pizza pizza = optPizza.get();
 		
@@ -80,7 +80,7 @@ public class PizzaController {
 		
 		
 
-		pizzarepo.save(pizza);
+		pizzaService.save(pizza);
 
 		return "redirect:/";
 	}
@@ -88,7 +88,7 @@ public class PizzaController {
 	@PostMapping("pizza/delete/{id}")
 	public String deletePizza(@PathVariable("id") int id) {
 
-		pizzarepo.deleteById(id);
+		pizzaService.deleteById(id);
 
 		return "redirect:/";
 	}
@@ -96,7 +96,7 @@ public class PizzaController {
 	@GetMapping("pizza/edit/{id}")
 	public String editPizza(Model model, @PathVariable("id") int id) {
 		
-		Optional <Pizza> Optpizza = pizzarepo.findById(id);
+		Optional <Pizza> Optpizza = pizzaService.findById(id);
 		Pizza pizza = Optpizza.get();
 		
 		model.addAttribute("pizza", pizza);
@@ -119,7 +119,7 @@ public class PizzaController {
 		
 		
 
-		pizzarepo.save(pizza);
+		pizzaService.save(pizza);
 
 		return "redirect:/pizza/" + id;
 	}
