@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<!-- BOOTSTRAP -->
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}"/>
+<title>Pizza</title>
+</head>
+<body class="bg-dark text-white">
+	<header class="text-center my-4">
+		<h1>Pizza:</h1> 
+	</header>
+	<main class="container d-flex justify-content-center">
+		<div th:object="${pizza}" class="card" style="width: 30rem;">
+	  		<img th:src="*{image}" class="card-img-top" th:alt="*{name}">
+	  		<div class="card-body text-black">
+	    		<p class="card-text">Nome: [[ *{name} ]] </p>
+	    		<p class="card-text">Descrizione: [[ *{description} ]]</p>
+	    		<p class="card-text">Prezzo: [[ *{price} ]] euro</p>
+	  		</div>
+		</div>
+	</main>
+	
+</body>
+</html>
