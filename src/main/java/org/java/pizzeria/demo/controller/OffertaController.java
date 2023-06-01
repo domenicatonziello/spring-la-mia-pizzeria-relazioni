@@ -38,21 +38,21 @@ public class OffertaController {
 	}
 
 	@PostMapping("pizza/{id}/offerta/create")
-	public String storeSpecialOffer(@PathVariable int id, Model model, @Valid @ModelAttribute OffertaSpeciale offerta, BindingResult bindingResult) {
+	public String storeSpecialOffer(@PathVariable int id, Model model, @ModelAttribute @Valid OffertaSpeciale offerta, BindingResult bindingResult) {
 
 
 		if(bindingResult.hasErrors()) {
 
-			model.addAttribute("specialOffer", offerta);
+			model.addAttribute("offerta", offerta);
 			model.addAttribute("errors", bindingResult);
 
 			return "offerta-create";
 		}
 
-		Optional<Pizza> optPizza = pizzaService.findById(id);
-		Pizza pizza = optPizza.get();
-
-		offerta.setPizza(pizza);
+//		Optional<Pizza> optPizza = pizzaService.findById(id);
+//		Pizza pizza = optPizza.get();
+//
+//		offerta.setPizza(pizza);
 
 		offertaService.save(offerta);
 
@@ -78,17 +78,17 @@ public class OffertaController {
 
 		if(bindingResult.hasErrors()) {
 
-			model.addAttribute("specialOffer", offerta);
+			model.addAttribute("offerta", offerta);
 			model.addAttribute("errors", bindingResult);
 
 			return "offerta-edit";
 
 		}
 
-		Optional<Pizza> optPizza = pizzaService.findById(pizzaId);
-		Pizza pizza = optPizza.get();
-
-		offerta.setPizza(pizza);
+//		Optional<Pizza> optPizza = pizzaService.findById(pizzaId);
+//		Pizza pizza = optPizza.get();
+//
+//		offerta.setPizza(pizza);
 
 		offertaService.save(offerta);
 
