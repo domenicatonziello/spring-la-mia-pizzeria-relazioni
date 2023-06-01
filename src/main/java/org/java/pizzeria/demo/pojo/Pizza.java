@@ -78,7 +78,10 @@ public class Pizza {
 	public void setOfferte(List<OffertaSpeciale> offerte) {
 		this.offerte = offerte;
 	}
-
+	
+	public String getFormattedPrezzo() {
+        return String.format("%,.2f€", price);
+}
 	
 
 	@Override

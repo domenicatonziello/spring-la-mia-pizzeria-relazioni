@@ -84,6 +84,17 @@ public class OffertaSpeciale {
 		this.pizza = pizza;
 	}
 	
+	
+	public String getDiscountedPrice() {
+		double prezzoPizza = getPizza().getPrice();
+
+		double prezzoScontato = (prezzoPizza - (prezzoPizza * getSconto() / 100));
+
+		return String.format("%,.2f", prezzoScontato);
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return getTitolo() + 
