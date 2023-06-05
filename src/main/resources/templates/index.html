@@ -11,8 +11,8 @@
 		<h1 class="text-danger my-5 text-center"> Pizzeria </h1>
 	</header>
 	<main class="container">
-		<a href="/pizza/create" class="btn btn-success mb-3">Crea nuova pizza</a>
-		
+		<a th:href="@{/pizza/create}" class="btn btn-success mb-3">Crea nuova pizza</a>
+		<a th:href="@{/ingredients}" class="btn btn-primary mb-3">Ingredienti</a>
 		<form class="d-flex justify-content-end mb-3" th:action="@{/}" method="POST">
 			<input class="me-2" type="text" name="name" th:value=${searchTerm}>
 			<button class="btn btn-secondary">Cerca</button>			

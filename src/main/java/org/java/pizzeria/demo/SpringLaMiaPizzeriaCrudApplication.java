@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.java.pizzeria.demo.pojo.Ingredienti;
 import org.java.pizzeria.demo.pojo.OffertaSpeciale;
 import org.java.pizzeria.demo.pojo.Pizza;
+import org.java.pizzeria.demo.serv.IngredientiService;
 import org.java.pizzeria.demo.serv.OffertaService;
 import org.java.pizzeria.demo.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	
 	@Autowired
 	private OffertaService offertaservice;
+	
+	@Autowired
+	private IngredientiService ingredientiservice;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -28,6 +33,16 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		Ingredienti ing1 = new Ingredienti("mozzarella");
+		Ingredienti ing2 = new Ingredienti("pomodori");
+		Ingredienti ing3 = new Ingredienti("acciughe");
+		
+		ingredientiservice.save(ing1);
+		ingredientiservice.save(ing2);
+		ingredientiservice.save(ing3);
+		
+		
+		
 		Pizza margherita = new Pizza("margherita", "descrizione pizza", "https://static.cookist.it/wp-content/uploads/sites/21/2018/04/pizza-margherita-fatta-in-casa.jpg", 10.00f);
 		Pizza marinara = new Pizza("marinara", "descrizione pizza marinara", "https://static.cookist.it/wp-content/uploads/sites/21/2018/04/pizza-margherita-fatta-in-casa.jpg", 8.00f);
 		

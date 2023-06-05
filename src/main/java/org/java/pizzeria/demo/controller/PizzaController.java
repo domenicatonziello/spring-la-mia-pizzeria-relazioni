@@ -3,7 +3,9 @@ package org.java.pizzeria.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.java.pizzeria.demo.pojo.Ingredienti;
 import org.java.pizzeria.demo.pojo.Pizza;
+import org.java.pizzeria.demo.serv.IngredientiService;
 import org.java.pizzeria.demo.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,9 @@ public class PizzaController {
 	@Autowired
 	private PizzaService pizzaService;
 	
+	@Autowired
+	private IngredientiService ingredientiservice;
+	
 	@GetMapping("/")
 	public String getPizze(Model model) {
 		List<Pizza> pizze = pizzaService.findAll();
@@ -47,11 +52,17 @@ public class PizzaController {
 	@GetMapping("/pizza/{id}")
 	public String show(@PathVariable("id") int id, Model model ) {
 		
+		List<Ingredienti> ingredienti = ingredientiservice.findAll();
+		
+		
+		
 		Optional <Pizza> optPizza = pizzaService.findByIdWithOffertaSpeciale(id);
 		
 		Pizza pizza = optPizza.get();
 		
 		model.addAttribute("pizza",pizza);
+		model.addAttribute("ingredienti", ingredienti);
+		
 		
 		return "show";
 	}
@@ -59,6 +70,9 @@ public class PizzaController {
 	@GetMapping("/pizza/create")
 	public String create(Model model) {
 		
+		List<Ingredienti> ingredienti = ingredientiservice.findAll();
+		
+		model.addAttribute("ingredienti", ingredienti);
 		model.addAttribute("pizza", new Pizza());
 		return "create";
 	}
@@ -96,9 +110,13 @@ public class PizzaController {
 	@GetMapping("pizza/edit/{id}")
 	public String editPizza(Model model, @PathVariable("id") int id) {
 		
+		List<Ingredienti> ingredienti = ingredientiservice.findAll();
+		
+		
 		Optional <Pizza> Optpizza = pizzaService.findById(id);
 		Pizza pizza = Optpizza.get();
 		
+		model.addAttribute("ingredienti", ingredienti);
 		model.addAttribute("pizza", pizza);
 		return "edit-form";
 	}

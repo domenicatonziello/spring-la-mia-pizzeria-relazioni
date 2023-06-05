@@ -16,6 +16,11 @@
 	  		<div class="card-body text-black">
 	    		<p class="card-text">Nome: [[ *{name} ]] </p>
 	    		<p class="card-text">Descrizione: [[ *{description} ]]</p>
+	    		<p> Ingredienti:	    		
+		    		<small th:each="ingrediente : ${ingredienti}" th:object="${ingrediente}" >
+		    			[[ *{nome} ]]
+		    		</small>
+	    		</p>
 	    		<p class="card-text">Prezzo: [[ *{price} ]] euro</p>
 	    		<h6>Offerte: </h6>
 	    		<ul th:each="offerta : ${pizza.offerte}" th:object="${offerta}">
