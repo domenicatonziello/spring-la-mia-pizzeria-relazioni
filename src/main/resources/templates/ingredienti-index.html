@@ -12,6 +12,7 @@
 	</header>
 	<main class="container">
 		<a th:href="@{/ingredients/create}" class="btn btn-success mb-3">Aggiungi nuovo ingrediente</a> 
+		<a th:href="@{/}" class="btn btn-primary mb-3">Pizze</a>
 		<ul th:each = "ingrediente : ${ingredienti}" th:object=${ingrediente}>
 			<li> 
 				[[ *{nome} ]] 
